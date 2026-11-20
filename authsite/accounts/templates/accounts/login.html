@@ -1,0 +1,36 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block title %}Login · Solstice Atelier{% endblock %}
+{% block body_class %}login-page{% endblock %}
+{% block content %}
+<section class="card">
+  <img class="card-logo" src="{% static 'img/logo.png' %}" alt="Solstice Atelier logo">
+  <h1>Login</h1>
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+      <div class="alert alert-error">{{ form.non_field_errors.0 }}</div>
+    {% endif %}
+
+    <div class="field">
+      <label for="{{ form.username.id_for_label }}">Enter your username</label>
+      {{ form.username }}
+      {% for e in form.username.errors %}<span class="error">{{ e }}</span>{% endfor %}
+    </div>
+
+    <div class="field">
+      <label for="{{ form.password.id_for_label }}">Enter your password</label>
+      {{ form.password }}
+      {% for e in form.password.errors %}<span class="error">{{ e }}</span>{% endfor %}
+    </div>
+
+    <a class="forgot" href="{% url 'password_reset' %}">forgot password?</a>
+
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit" class="btn">Login</button>
+  </form>
+
+  <p class="switch">Don’t have an account? <a href="{% url 'register' %}">Sign Up</a></p>
+</section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block title %}Home · Solstice Atelier{% endblock %}
+{% block body_class %}register-page{% endblock %}
+{% block brand %}
+<section class="brand">
+  <img src="{% static 'img/logo.png' %}" alt="Solstice Atelier logo">
+  <h2>Solstice Atelier</h2>
+  <p>BREATHE IN AND VISUALIZE</p>
+</section>
+{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Hello!</h1>
+  <p class="lead">Signed in as <strong>{{ user.username }}</strong>.</p>
+  <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn">Log out</button>
+  </form>
+</section>
+{% endblock %}
